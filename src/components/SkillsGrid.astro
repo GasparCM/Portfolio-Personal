@@ -1,0 +1,82 @@
+---
+interface Props {
+	skills: {
+		frontend: string[];
+		backend: string[];
+		tools: string[];
+	};
+}
+
+const { skills } = Astro.props;
+---
+
+<div class="skills-container">
+	<div class="skills-category">
+		<h3>Frontend</h3>
+		<div class="skills-grid">
+			{skills.frontend.map(skill => (
+				<div class="skill">{skill}</div>
+			))}
+		</div>
+	 </div>
+	</div>
+
+	<div class="skills-category">
+		<h3>Backend</h3>
+		<div class="skills-grid">
+			{skills.backend.map(skill => (
+				<div class="skill">{skill}</div>
+			))}
+		</div>
+	</div>
+
+	<div class="skills-category">
+		<h3>Herramientas & DevOps</h3>
+		<div class="skills-grid">
+			{skills.tools.map(skill => (
+				<div class="skill">{skill}</div>
+			))}
+		</div>
+	</div>
+</div>
+
+<style>
+	.skills-container {
+		display: grid;
+		gap: 2rem;
+	}
+
+	.skills-category h3 {
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		margin-top:2rem;
+		color: #1a1a1a;
+	}
+
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+		gap: 1rem;
+	}
+
+	.skill {
+		background: #f5f5f5;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		text-align: center;
+		font-weight: 500;
+		transition: transform 0.2s;
+	}
+
+	.skill:hover {
+		transform: translateY(-2px);
+		background: #1a1a1a;
+		color: white;
+	}
+
+	@media (max-width: 768px) {
+		.skills-grid {
+			grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+		}
+	}
+</style>

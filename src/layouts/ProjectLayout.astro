@@ -1,0 +1,202 @@
+---
+---
+<Layout title={frontmatter.title + " | Xavier Cano"}>
+	<Navigation />
+	<main>
+		<article class="project-article">
+			<header class="project-header">
+				<div class="container">
+					<h1>{frontmatter.title}</h1>
+					<p class="project-description">{frontmatter.description}</p>
+					<div class="project-meta">
+						<div class="meta-item">
+							<span class="label">Cliente</span>
+							<span class="value">{frontmatter.client}</span>
+						</div>
+						<div class="meta-item">
+							<span class="label">Año</span>
+							<span class="value">{frontmatter.year}</span>
+						</div>
+						<div class="meta-item">
+							<span class="label">Rol</span>
+							<span class="value">{frontmatter.role}</span>
+						</div>
+					</div>
+					<div class="tags">
+						{frontmatter.tags.map((tag: string) => (
+							<span class="tag">{tag}</span>
+						))}
+					</div>
+				</div>
+			</header>
+
+			<div class="project-content">
+				<div class="container">
+					<slot />
+				</div>
+			</div>
+
+			<div class="project-gallery">
+				<div class="container">
+					{frontmatter.gallery && (
+						<div class="gallery-grid">
+							{frontmatter.gallery.map((image: string) => (
+								<img src={image} alt="Project screenshot" loading="lazy" />
+							))}
+						</div>
+					)}
+				</div>
+			</div>
+
+			<div class="next-project">
+				<div class="container">
+					<h2>Siguiente Proyecto</h2>
+					<a href={frontmatter.nextProject.link} class="next-project-link">
+						<span>{frontmatter.nextProject.title}</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<line x1="5" y1="12" x2="19" y2="12"></line>
+							<polyline points="12 5 19 12 12 19"></polyline>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</article>
+	</main>
+</Layout>
+
+<style>
+	.project-header {
+		background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+		color: white;
+		padding: 8rem 0 4rem;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+	}
+
+	h1 {
+		font-size: 3.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.project-description {
+		font-size: 1.25rem;
+		opacity: 0.9;
+		max-width: 800px;
+		margin-bottom: 2rem;
+	}
+
+	.project-meta {
+		display: flex;
+		gap: 3rem;
+		margin-bottom: 2rem;
+	}
+
+	.meta-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.label {
+		font-size: 0.875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		opacity: 0.8;
+	}
+
+	.value {
+		font-size: 1.125rem;
+		font-weight: 500;
+	}
+
+	.tags {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	.tag {
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.5rem 1rem;
+		border-radius: 2rem;
+		font-size: 0.875rem;
+	}
+
+	.project-content {
+		padding: 4rem 0;
+	}
+
+	.project-content :global(h2) {
+		font-size: 2rem;
+		margin: 2rem 0 1rem;
+	}
+
+	.project-content :global(p) {
+		line-height: 1.8;
+		margin-bottom: 1.5rem;
+		color: #444;
+	}
+
+	.project-gallery {
+		background: #f8f9fa;
+		padding: 4rem 0;
+	}
+
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	.gallery-grid img {
+		width: 100%;
+		height: auto;
+		border-radius: 0.5rem;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.next-project {
+		padding: 4rem 0;
+		text-align: center;
+	}
+
+	.next-project h2 {
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		color: #666;
+	}
+
+	.next-project-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: #1a1a1a;
+		text-decoration: none;
+		font-size: 1.25rem;
+		font-weight: 500;
+		transition: all 0.3s ease;
+	}
+
+	.next-project-link:hover {
+		gap: 1rem;
+	}
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 2.5rem;
+		}
+
+		.project-meta {
+			flex-direction: column;
+			gap: 1.5rem;
+		}
+
+		.gallery-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

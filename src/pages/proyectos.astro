@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = [
+	{
+		title: "Desarrollo Web y Gestión de WordPress",
+		description: "Con más de 20 proyectos en WordPress, he creado y personalizado sitios web para diversas necesidades, desde blogs hasta tiendas en línea. Además, tengo experiencia en la gestión de hosting y VPS, utilizando paneles de control como Plesk para optimizar la administración de servidores.",
+		tags: ["Wordpress", "Astro", "MySQL", "Stripe"],
+		image: "/images/corales.png",
+		category: "web",
+		link: "/images/corales.png"
+	},
+	{
+		title: "MotoGest: Software de Gestión para Talleres",
+		description: "Desarrollada en Java Swing y SQLite, esta aplicación de escritorio permite a los usuarios gestionar la contabilidad de un taller mecánico, almacenando información de clientes, generando facturas en formato Excel y llevando el control de inventarios. El sistema incluye manejo de múltiples vistas y funcionalidades CRUD, optimizando la experiencia de usuario en el entorno local.",
+		tags: ["Java Swing", "SQLite"],
+		image: "/images/GesMotos.png",
+		category: "Desktop",
+		link: "/proyectos/erp"
+	},
+	{
+		title: "CineMovil: App de Películas en Android",
+		description: "Creada con Java y SQLite, esta aplicación permite gestionar una lista personalizada de películas. Implementa patrones de diseño como MVC y utiliza componentes modernos de Android como RecyclerView para listas eficientes y CardView para tarjetas visualmente atractivas. Se optimizó el rendimiento con el manejo eficiente de datos y recursos locales.",
+		tags: ["Java", "SQLite", "Android"],
+		image: "/images/PeliculasApp.jpg",
+		category: "mobile",
+		link: "/proyectos/fitness"
+	},
+];
+---
+
+<Layout title="Proyectos | Gaspar Cruañes">
+	<Navigation />
+	<main>
+		<section class="projects-header">
+			<div class="container">
+				<h1>Proyectos</h1>
+				<p class="subtitle">Una muestra de mi trabajo y experiencia</p>
+				<div style="display: flex; justify-content: center; margin-top:20px;">Me faltan algunos por subir...</div>
+			</div>
+		</section>
+
+		<section class="projects-grid">
+			<div class="container">
+				<div class="filters">
+					<button class="filter-btn active" data-category="todos">Todos</button>
+					<button class="filter-btn" data-category="web">Web</button>
+					<button class="filter-btn" data-category="mobile">Mobile</button>
+					<button class="filter-btn" data-category="Desktop">Desktop</button>
+				</div>
+
+				<div class="grid">
+					{projects.map(project => (
+						<div class="project-item" data-category={project.category}>
+							<ProjectCard {...project} />
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<script>
+	function initializeFilters() {
+		const filterButtons = document.querySelectorAll('.filter-btn');
+		const projectItems = document.querySelectorAll('.project-item');
+
+		filterButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				// Remove active class from all buttons
+				filterButtons.forEach(btn => btn.classList.remove('active'));
+				// Add active class to clicked button
+				button.classList.add('active');
+
+				const category = button.getAttribute('data-category');
+
+				projectItems.forEach(item => {
+					const itemCategory = item.getAttribute('data-category');
+					if (category === 'todos' || category === itemCategory) {
+						item.style.display = 'block';
+						item.style.animation = 'fadeIn 0.5s ease forwards';
+					} else {
+						item.style.display = 'none';
+					}
+				});
+			});
+		});
+	}
+
+	// Initialize filters when the page loads
+	document.addEventListener('DOMContentLoaded', initializeFilters);
+</script>
+
+<style>
+
+
+	.projects-header {
+		background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+		color: white;
+		padding: 6rem 0;
+		text-align: center;
+	}
+
+	h1 {
+		font-size: 3.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.subtitle {
+		font-size: 1.25rem;
+		opacity: 0.9;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+	}
+
+	.projects-grid {
+		padding: 4rem 0;
+	}
+
+	.filters {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		margin-bottom: 3rem;
+	}
+
+	.filter-btn {
+		padding: 0.5rem 1.5rem;
+		border: none;
+		background: #f5f5f5;
+		border-radius: 2rem;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		font-size: 1rem;
+	}
+
+	.filter-btn:hover {
+		background: #e0e0e0;
+	}
+
+	.filter-btn.active {
+		background: #1a1a1a;
+		color: white;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: 2rem;
+	}
+
+	.project-item {
+		animation: fadeIn 0.5s ease forwards;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.filters {
+			flex-wrap: wrap;
+		}
+
+		.grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Timeline from '../components/Timeline.astro';
+import ContactButton from '../components/ContactButton.astro';
+import SkillsGrid from '../components/SkillsGrid.astro';
+import Navigation from '../components/Navigation.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const skills = {
+  frontend: ['JavaScript', 'TypeScript', 'Astro', 'HTML5', 'CSS', 'Tailwind','JavaSwing'],
+  backend: ['Java', 'Python', 'Dart','C/C++', 'PostgreSQL','SpringBoot'],
+  tools: ['Git/GitHub', 'Docker', 'Supabase','Firebase']
+};
+
+const projects = [
+	{
+		title: "Desarrollo Web y Gestión de WordPress",
+		description: "Con más de 20 proyectos en WordPress, he creado y personalizado sitios web para diversas necesidades, desde blogs hasta tiendas en línea. Además, tengo experiencia en la gestión de hosting y VPS, utilizando paneles de control como Plesk para optimizar la administración de servidores.",
+		tags: ["Wordpress", "Astro", "MySQL", "Stripe"],
+		image: "/images/corales.png",
+		category: "web",
+		link: "/images/corales.png"
+	},
+	{
+		title: "MotoGest: Software de Gestión para Talleres",
+		description: "Desarrollada en Java Swing y Supabase, esta aplicación de escritorio permite a los usuarios gestionar la contabilidad de un taller mecánico, almacenando información de clientes, generando facturas en formato Excel y llevando el control de inventarios. El sistema incluye manejo de múltiples vistas y funcionalidades CRUD, optimizando la experiencia de usuario en el entorno local.",
+		tags: ["Java Swing", "Supabase"],
+		image: "/images/GesMotos.png",
+		category: "Desktop",
+		link: "/proyectos/erp"
+	},
+	{
+		title: "CineMovil: App de Películas en Android",
+		description: "Creada con Java y SQLite, esta aplicación permite gestionar una lista personalizada de películas. Implementa patrones de diseño como MVC y utiliza componentes modernos de Android como RecyclerView para listas eficientes y CardView para tarjetas visualmente atractivas. Se optimizó el rendimiento con el manejo eficiente de datos y recursos locales.",
+		tags: ["Java", "SQLite", "Android"],
+		image: "/images/PeliculasApp.jpg",
+		category: "mobile",
+		link: "/proyectos/fitness"
+	},
+];
+---
+
+<Layout title="Gaspar Cruañes | Software Engineer">
+	<Navigation />
+	<main>
+		<section class="hero">
+			<div class="container">
+				<h1>Gaspar Cruañes Martínez</h1>
+				<p class="subtitle">Ingeniero De Software | Soluciones Tecnológicas</p>
+				<p class="tagline"></p>
+				<ContactButton />
+			</div>
+		</section>
+
+		<section class="about" id="about">
+			<div class="container">
+				<h2>Sobre mí</h2>
+				<div class="about-content">
+					<div class="about-text">
+						<p>Soy ingeniero de software con más de dos años de experiencia en el desarrollo de aplicaciones web y móviles. Me especializo en crear soluciones tecnológicas innovadoras que optimizan procesos y generan un impacto positivo en las personas y las empresas.</p>
+<p>Desde Gata de Gorgos, Alicante, he trabajado en el desarrollo de proyectos para una amplia gama de clientes, desde pequeñas empresas locales hasta grandes corporaciones, adaptándome a sus necesidades específicas y superando sus expectativas.</p>
+
+					</div>
+					<div class="quick-info">
+						<div class="info-item">
+							<span class="number">2+</span>
+							<span class="label">Años de Experiencia</span>
+						</div>
+						<div class="info-item">
+							<span class="number">20+</span>
+							<span class="label">Proyectos Completados</span>
+						</div>
+						<div class="info-item">
+							<span class="number">15+</span>
+							<span class="label">Clientes Satisfechos</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="experience" id="experience">
+			<div class="container">
+				<h2>Experiencia Profesional</h2>
+				<Timeline />
+			</div>
+		</section>
+
+		<section class="skills" id="skills">
+			<div class="container">
+				<h2>Tecnologías y Habilidades</h2>
+				<SkillsGrid {skills} />
+			</div>
+		</section>
+
+		<section class="featured-projects">
+			<div class="container">
+				<h2>Proyectos Destacados</h2>
+					<div style="display: flex; justify-content: center;">Me faltan algunos por subir...</div>
+					<div class="grid">
+						{projects.map(project => (
+							<div class="project-item" data-category={project.category}>
+								<ProjectCard {...project} />
+							</div>
+						))}
+					</div>
+				<div class="cta-container">
+					<a href="/proyectos" class="cta-button">Ver todos los proyectos</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="contact" id="contact">
+			<div class="container">
+				<h2>¿Iniciamos un proyecto juntos?</h2>
+				<p class="contact-text">Estoy disponible para proyectos freelance y colaboraciones.</p>
+				<ContactForm />
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.grid {
+		margin-top: 3rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: 2rem;
+	}
+
+	.project-item {
+		animation: fadeIn 0.5s ease forwards;
+	}
+	main {
+		color: #1a1a1a;
+		background: #ffffff;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+	}
+
+	section {
+		padding: 5rem 0;
+	}
+
+	.hero {
+		background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+		color: white;
+		text-align: center;
+		padding: 8rem 0;
+	}
+
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+
+	.subtitle {
+		font-size: 1.5rem;
+		opacity: 0.9;
+		margin-bottom: 1rem;
+	}
+
+	.tagline {
+		font-size: 1.25rem;
+		opacity: 0.8;
+		margin-bottom: 2rem;
+	}
+
+	h2 {
+		font-size: 2.5rem;
+		margin-bottom: 2rem;
+		text-align: center;
+	}
+
+	.about-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+	}
+
+	.about-text p {
+		margin-bottom: 1.5rem;
+		line-height: 1.8;
+	}
+
+	.quick-info {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 2rem;
+		text-align: center;
+	}
+
+	.info-item {
+		padding: 1.5rem;
+		background: #f8f9fa;
+		border-radius: 1rem;
+	}
+
+	.number {
+		display: block;
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: #1a1a1a;
+		margin-bottom: 0.5rem;
+	}
+
+	.label {
+		font-size: 0.9rem;
+		color: #666;
+	}
+
+	.section-intro {
+		text-align: center;
+		margin-bottom: 3rem;
+		color: #666;
+	}
+
+	.cta-container {
+		text-align: center;
+		margin-top: 3rem;
+	}
+
+	.cta-button {
+		display: inline-block;
+		padding: 1rem 2rem;
+		background: #1a1a1a;
+		color: white;
+		text-decoration: none;
+		border-radius: 2rem;
+		transition: all 0.3s ease;
+	}
+
+	.cta-button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	}
+
+	.contact {
+		background: #f8f9fa;
+		text-align: center;
+	}
+
+	.contact-text {
+		margin-bottom: 2rem;
+		font-size: 1.2rem;
+		color: #666;
+	}
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 3rem;
+		}
+
+		.subtitle {
+			font-size: 1.25rem;
+		}
+
+		.about-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		section {
+			padding: 3rem 0;
+		}
+	}
+</style>

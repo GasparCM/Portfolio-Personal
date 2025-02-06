@@ -1,0 +1,44 @@
+# Dependencias de Node.js
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Archivos de compilación y caché
+dist/
+.cache/
+.output/
+.vite/
+astro.config.mjs
+
+# Configuración de entornos locales
+.env
+.env.local
+.env.development
+.env.production
+
+# Archivos de logs y depuración
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+astro-error.log*
+
+# Directorios específicos de IDEs
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Archivos de implementación de GitHub Pages (si usas `astro build` y luego subes manualmente)
+.github/
+
+# Archivos generados por editores
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# Caché de Astro
+.astro/
